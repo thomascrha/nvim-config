@@ -10,7 +10,7 @@ ts.setup {
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = {
     'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help',
-    'javascript', 'json', 'jsonc', 'html', 'css', 'scss'
+    'javascript', 'json', 'jsonc', 'html', 'css', 'scss', 'vim'
   },
 
   highlight = { enable = true },

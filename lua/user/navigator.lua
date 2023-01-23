@@ -6,4 +6,8 @@ if not status_ok then
 	return
 end
 
-navigator.setup()
+navigator.setup({
+	lsp = {
+		format_on_save = false
+	}
+})

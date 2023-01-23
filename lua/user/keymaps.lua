@@ -72,12 +72,61 @@ vim.keymap.set('n', '<leader>gs', telescope.git_stash, { desc = 'Find [G]it [S]t
 -- undo
 vim.keymap.set("n", "<F5>", "<cmd>UndotreeToggle<CR>")
 
--- zenmode
-vim.keymap.set("n", "<leader>zz", function()
-  require("zen-mode").toggle()
-end)
 -- Spelling
 -- vim.keymap.set("n", "<leader>s", function()
 -- require("telescope.builtin").spell_suggest(require('telescope.themes').get_cursor({}))
 -- end)
---
+--#region
+
+-- Trouble
+vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
+  { silent = true, noremap = true }
+)
+vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>",
+  { silent = true, noremap = true }
+)
+vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
+  { silent = true, noremap = true }
+)
+vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>",
+  { silent = true, noremap = true }
+)
+vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
+  { silent = true, noremap = true }
+)
+vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
+  { silent = true, noremap = true }
+)
+
+-- gitsigns
+local gs = require("gitsigns")
+
+-- Navigation
+vim.keymap.set('n', ']c', function()
+  if vim.wo.diff then return ']c' end
+  vim.schedule(function() gs.next_hunk() end)
+  return '<Ignore>'
+end, { expr = true })
+
+vim.keymap.set('n', '[c', function()
+  if vim.wo.diff then return '[c' end
+  vim.schedule(function() gs.prev_hunk() end)
+  return '<Ignore>'
+end, { expr = true })
+
+-- Actions
+vim.keymap.set({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
+vim.keymap.set({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
+vim.keymap.set('n', '<leader>hS', gs.stage_buffer)
+vim.keymap.set('n', '<leader>hu', gs.undo_stage_hunk)
+vim.keymap.set('n', '<leader>hR', gs.reset_buffer)
+vim.keymap.set('n', '<leader>hp', gs.preview_hunk)
+vim.keymap.set('n', '<leader>hb', function() gs.blame_line{full=true} end)
+vim.keymap.set('n', '<leader>tb', gs.toggle_current_line_blame)
+vim.keymap.set('n', '<leader>hd', gs.diffthis)
+vim.keymap.set('n', '<leader>hD', function() gs.diffthis('~') end)
+vim.keymap.set('n', '<leader>td', gs.toggle_deleted)
+
+-- Text object
+vim.keymap.set({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+

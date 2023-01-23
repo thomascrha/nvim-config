@@ -35,13 +35,6 @@ vim.o.relativenumber = true
 -- for god sake stop the rining
 vim.o.errorbells = false
 
--- [[ Basic Keymaps ]]
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 -- turn off the backup rubbish
 vim.o.swapfile = false
 vim.o.backup = false
