@@ -39,6 +39,7 @@ require('lazy').setup({
   "williamboman/mason-lspconfig.nvim",
   "neovim/nvim-lspconfig",
   "j-hui/fidget.nvim",
+  "folke/neodev.nvim",
 
   -- indent line
   "lukas-reineke/indent-blankline.nvim",
@@ -87,14 +88,6 @@ require('lazy').setup({
   },
 
   "numToStr/Comment.nvim",
-
-  {
-    "ray-x/navigator.lua",
-    dependencies = {
-      { "ray-x/guihua.lua", build = "cd lua/fzy && make" },
-      { "neovim/nvim-lspconfig" },
-    },
-  },
 
   {
     "akinsho/bufferline.nvim",
@@ -153,15 +146,12 @@ require('lazy').setup({
   "petertriho/nvim-scrollbar",
 
   -- virtualenv support for pyright
-  {
-    'HallerPatrick/py_lsp.nvim',
-    config = function()
-      require("py_lsp").setup {
-        -- This is optional, but allows to create virtual envs from nvim
-        host_python = "/usr/bin/python3",
-        default_venv_name = "venv" -- For local venv
-      }
-    end
-  }
-})
+  -- {
+  --   'HallerPatrick/py_lsp.nvim',
+  --   config = function()
+  --     require("py_lsp").setup()
+  --   end,
+  --
+  -- }
+ })
 
