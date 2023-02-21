@@ -73,9 +73,9 @@ vim.keymap.set('n', '<leader>gs', telescope.git_stash, { desc = 'Find [G]it [S]t
 vim.keymap.set("n", "<F5>", "<cmd>UndotreeToggle<CR>")
 
 -- Spelling
--- vim.keymap.set("n", "<leader>s", function()
--- require("telescope.builtin").spell_suggest(require('telescope.themes').get_cursor({}))
--- end)
+vim.keymap.set("n", "<leader>s", function()
+require("telescope.builtin").spell_suggest(require('telescope.themes').get_cursor({}))
+end)
 --#region
 
 -- Trouble

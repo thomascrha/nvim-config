@@ -94,14 +94,14 @@ require('lazy').setup({
     dependencies = "nvim-tree/nvim-web-devicons"
   },
 
-  {
-    "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap" }
-  },
-
-  "jayp0521/mason-nvim-dap.nvim",
-
-  "theHamsta/nvim-dap-virtual-text",
+  -- {
+  --   "rcarriga/nvim-dap-ui",
+  --   dependencies = { "mfussenegger/nvim-dap" }
+  -- },
+  --
+  -- "jayp0521/mason-nvim-dap.nvim",
+  --
+  -- "theHamsta/nvim-dap-virtual-text",
 
   -- Git related plugins
   "tpope/vim-fugitive",
@@ -146,12 +146,12 @@ require('lazy').setup({
   "petertriho/nvim-scrollbar",
 
   -- virtualenv support for pyright
-  -- {
-  --   'HallerPatrick/py_lsp.nvim',
-  --   config = function()
-  --     require("py_lsp").setup()
-  --   end,
-  --
-  -- }
+  {
+    'HallerPatrick/py_lsp.nvim',
+    config = function()
+      require("py_lsp").setup()
+    end,
+
+  }
  })
 
