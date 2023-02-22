@@ -1,46 +1,64 @@
+-----------------------------------------------------------------------------------
 -- indent file
-vim.keymap.set('n', '<leader>i', 'gg=G``')
+-----------------------------------------------------------------------------------
+vim.keymap.set('n', '<leader>i', 'gg=G``', { desc = 'Automatically [i]ndent file' })
 
+-----------------------------------------------------------------------------------
 -- Keymaps for better default experience
+-----------------------------------------------------------------------------------
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
+-----------------------------------------------------------------------------------
 -- use leader and yank to copy to the clipboard Primeagen
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
+-----------------------------------------------------------------------------------
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = '[y]ank into clipboard' })
+vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = '[Y]ank to end of line into clipboard' })
 
-vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]])
-vim.keymap.set("n", "<leader>P", [["+P]])
-
+-- on WSL this doesn't work with clip.exe - simply use ctrl-shift-v in INSET mode
+if not vim.fn.has("wsl") then
+  vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = '' })
+  vim.keymap.set("n", "<leader>P", [["+P]], { desc = '' })
+end
+-----------------------------------------------------------------------------------
 -- manually remove all training whitespace
-vim.keymap.set('n', '<leader>w', '<cmd>StripTrailingWhitespace<cr>')
+-----------------------------------------------------------------------------------
+vim.keymap.set('n', '<leader>w', '<cmd>StripTrailingWhitespace<cr>', { desc = '' })
 
+-----------------------------------------------------------------------------------
 -- allow moving a wound splits with ctrl + direction
-vim.keymap.set('n', '<leader><Left>', '<C-w>h')
-vim.keymap.set('n', '<leader><Right>', '<C-w>l')
-vim.keymap.set('n', '<leader><Up>', '<C-w>k')
-vim.keymap.set('n', '<leader><Down>', '<C-w>j')
+-----------------------------------------------------------------------------------
+vim.keymap.set('n', '<leader><Left>', '<C-w>h', { desc = '' })
+vim.keymap.set('n', '<leader><Right>', '<C-w>l', { desc = '' })
+vim.keymap.set('n', '<leader><Up>', '<C-w>k', { desc = '' })
+vim.keymap.set('n', '<leader><Down>', '<C-w>j', { desc = '' })
 
-vim.keymap.set('n', '<leader>S', "<cmd>lua require('spectre').open()<cr>")
-
--- "search current word
-vim.keymap.set({ 'n', 'v' }, '<leader>sw', "<cmd>lua require('spectre').open_visual({select_word=true})<cr>")
-
-
--- "  search in current file
-vim.keymap.set('n', "<leader>sp", "<cmd>lua require('spectre').open_file_search()<cr>")
+-----------------------------------------------------------------------------------
 -- " run command :Spectre
+-----------------------------------------------------------------------------------
+vim.keymap.set('n', '<leader>S', "<cmd>lua require('spectre').open()<cr>", { desc = '' })
+-- "search current word
+vim.keymap.set({ 'n', 'v' }, '<leader>sw', "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", { desc = '' })
+-- "  search in current file
+vim.keymap.set('n', "<leader>sp", "<cmd>lua require('spectre').open_file_search()<cr>", { desc = '' })
 
+-----------------------------------------------------------------------------------
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+-----------------------------------------------------------------------------------
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = '' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = '' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = '' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = '' })
 
+-----------------------------------------------------------------------------------
 -- show nvim
-vim.keymap.set('n', '<leader>t', "<cmd>NvimTreeFindFileToggle<cr>")
-vim.keymap.set('n', '<leader>T', "<cmd>NvimTreeFindFileToggle<cr><cmd>NvimTreeFindFileToggle<cr>")
+-----------------------------------------------------------------------------------
+vim.keymap.set('n', '<leader>t', "<cmd>NvimTreeFindFileToggle<cr>", { desc = '' })
+vim.keymap.set('n', '<leader>T', "<cmd>NvimTreeFindFileToggle<cr><cmd>NvimTreeFindFileToggle<cr>", { desc = '' })
 
+-----------------------------------------------------------------------------------
+-- Telescope
+-----------------------------------------------------------------------------------
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
@@ -69,36 +87,48 @@ vim.keymap.set('n', '<leader>gc', telescope.git_commits, { desc = 'Find [G]it [C
 vim.keymap.set('n', '<leader>gb', telescope.git_branches, { desc = 'Find [G]it [B]ranches' })
 vim.keymap.set('n', '<leader>gs', telescope.git_stash, { desc = 'Find [G]it [S]tashes' })
 
+-----------------------------------------------------------------------------------
 -- undo
-vim.keymap.set("n", "<F5>", "<cmd>UndotreeToggle<CR>")
+-----------------------------------------------------------------------------------
+vim.keymap.set("n", "<F5>", "<cmd>UndotreeToggle<CR>", { desc = '' })
 
+-----------------------------------------------------------------------------------
 -- Spelling
-vim.keymap.set("n", "<leader>s", function()
-require("telescope.builtin").spell_suggest(require('telescope.themes').get_cursor({}))
-end)
+-----------------------------------------------------------------------------------
+vim.keymap.set(
+  "n", "<leader>s",
+  function()
+    require("telescope.builtin").spell_suggest(require('telescope.themes').get_cursor({}))
+  end,
+  { desc = '' }
+)
 --#region
 
+-----------------------------------------------------------------------------------
 -- Trouble
+-----------------------------------------------------------------------------------
 vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
-  { silent = true, noremap = true }
+  { silent = true, noremap = true, desc = ''}
 )
 vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>",
-  { silent = true, noremap = true }
+  { silent = true, noremap = true, desc = ''}
 )
 vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
-  { silent = true, noremap = true }
+  { silent = true, noremap = true, desc = '' }
 )
 vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>",
-  { silent = true, noremap = true }
+  { silent = true, noremap = true, desc = '' }
 )
 vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
-  { silent = true, noremap = true }
+  { silent = true, noremap = true, desc = '' }
 )
 vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
-  { silent = true, noremap = true }
+  { silent = true, noremap = true, desc = '' }
 )
 
+-----------------------------------------------------------------------------------
 -- gitsigns
+-----------------------------------------------------------------------------------
 local gs = require("gitsigns")
 
 -- Navigation
